@@ -125,7 +125,7 @@ class TrendingNowList extends React.Component {
         <section>
           <div class="container-fluid mt-1 ml-6">
             <div class="mb-2">
-              <h4 class="d-table-cell mb-0 text-light">Trending Now</h4>
+              <h4 class="d-table-cell mb-0 text-light">Harry Potter</h4>
             </div>
 
             <div class="row mx-n1 mb-lg-5">
@@ -147,7 +147,7 @@ class TrendingNowList extends React.Component {
         <section>
           <div class="container-fluid mt-1 ml-6">
             <div class="mb-2">
-              <h4 class="d-table-cell mb-0 text-light">Trending Now</h4>
+              <h4 class="d-table-cell mb-0 text-light">Lord Of The Rings</h4>
             </div>
 
             <div class="row mx-n1 mb-lg-5">
@@ -169,7 +169,7 @@ class TrendingNowList extends React.Component {
         <section>
           <div class="container-fluid mt-1 ml-6">
             <div class="mb-2">
-              <h4 class="d-table-cell mb-0 text-light">Trending Now</h4>
+              <h4 class="d-table-cell mb-0 text-light">The Avengers</h4>
             </div>
 
             <div class="row mx-n1 mb-lg-5">
