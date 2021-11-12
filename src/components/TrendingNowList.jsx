@@ -8,6 +8,8 @@ import { Col, Container, Form, Row, Spinner } from "react-bootstrap";
 class TrendingNowList extends React.Component {
   state = {
     movies: [],
+    movies2: [],
+    movies3: [],
     searchQuery: "",
     isLoading: true,
     isError: false,
@@ -15,6 +17,8 @@ class TrendingNowList extends React.Component {
 
   componentDidMount = () => {
     this.fetchMovies();
+    this.fetchMovies2();
+    this.fetchMovies3();
   };
 
   fetchMovies = async () => {
@@ -29,6 +33,60 @@ class TrendingNowList extends React.Component {
           isLoading: false,
         });
         console.log(this.state.movies);
+      } else {
+        // if we fall here we're getting an error, maybe a 404
+        this.setState({
+          isLoading: false,
+          isError: true,
+        });
+      }
+    } catch (error) {
+      this.setState({
+        isLoading: false,
+        isError: true,
+      });
+    }
+  };
+
+  fetchMovies2 = async () => {
+    try {
+      let response = await fetch(
+        "https://www.omdbapi.com/?apikey=b2d7b7f8&s=lord"
+      );
+      if (response.ok) {
+        let data = await response.json();
+        this.setState({
+          movies2: data.Search,
+          isLoading: false,
+        });
+        console.log(this.state.movies2);
+      } else {
+        // if we fall here we're getting an error, maybe a 404
+        this.setState({
+          isLoading: false,
+          isError: true,
+        });
+      }
+    } catch (error) {
+      this.setState({
+        isLoading: false,
+        isError: true,
+      });
+    }
+  };
+
+  fetchMovies3 = async () => {
+    try {
+      let response = await fetch(
+        "https://www.omdbapi.com/?apikey=b2d7b7f8&s=avengers"
+      );
+      if (response.ok) {
+        let data = await response.json();
+        this.setState({
+          movies3: data.Search,
+          isLoading: false,
+        });
+        console.log(this.state.movies2);
       } else {
         // if we fall here we're getting an error, maybe a 404
         this.setState({
@@ -96,7 +154,7 @@ class TrendingNowList extends React.Component {
               {this.state.isLoading && (
                 <Spinner animation="border" variant="info" />
               )}
-              {this.state.movies
+              {this.state.movies2
                 .filter((res) =>
                   res.Title.toLowerCase().includes(this.state.searchQuery)
                 )
@@ -118,7 +176,7 @@ class TrendingNowList extends React.Component {
               {this.state.isLoading && (
                 <Spinner animation="border" variant="info" />
               )}
-              {this.state.movies
+              {this.state.movies3
                 .filter((res) =>
                   res.Title.toLowerCase().includes(this.state.searchQuery)
                 )
