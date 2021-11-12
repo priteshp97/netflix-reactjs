@@ -3,12 +3,14 @@
 
 import React from "react";
 import TrendingNowSingle from "./TrendingNowSingle";
-import { Col, Container, Form, Row } from "react-bootstrap";
+import { Col, Container, Form, Row, Spinner } from "react-bootstrap";
 
 class TrendingNowList extends React.Component {
   state = {
     movies: [],
     searchQuery: "",
+    isLoading: true,
+    isError: false,
   };
 
   componentDidMount = () => {
@@ -24,19 +26,27 @@ class TrendingNowList extends React.Component {
         let data = await response.json();
         this.setState({
           movies: data.Search,
+          isLoading: false,
         });
         console.log(this.state.movies);
       } else {
-        console.log("something went wrong");
+        // if we fall here we're getting an error, maybe a 404
+        this.setState({
+          isLoading: false,
+          isError: true,
+        });
       }
     } catch (error) {
-      console.log(error);
+      this.setState({
+        isLoading: false,
+        isError: true,
+      });
     }
   };
 
   render() {
     return (
-      <section>
+      <div>
         <Container>
           <Row>
             <Col>
@@ -54,23 +64,72 @@ class TrendingNowList extends React.Component {
           </Row>
         </Container>
 
-        <div class="container-fluid mt-1 ml-6">
-          <div class="mb-2">
-            <h4 class="d-table-cell mb-0 text-light">Trending Now</h4>
-          </div>
+        <section>
+          <div class="container-fluid mt-1 ml-6">
+            <div class="mb-2">
+              <h4 class="d-table-cell mb-0 text-light">Trending Now</h4>
+            </div>
 
-          <div class="row mx-n1 mb-lg-5">
-            {this.state.movies
-              .filter((res) =>
-                res.Title.toLowerCase().includes(this.state.searchQuery)
-              )
-              .slice(0, 6)
-              .map((res) => (
-                <TrendingNowSingle src={res.Poster} />
-              ))}
+            <div class="row mx-n1 mb-lg-5">
+              {this.state.isLoading && (
+                <Spinner animation="border" variant="info" />
+              )}
+              {this.state.movies
+                .filter((res) =>
+                  res.Title.toLowerCase().includes(this.state.searchQuery)
+                )
+                .slice(0, 6)
+                .map((res) => (
+                  <TrendingNowSingle src={res.Poster} />
+                ))}
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+
+        <section>
+          <div class="container-fluid mt-1 ml-6">
+            <div class="mb-2">
+              <h4 class="d-table-cell mb-0 text-light">Trending Now</h4>
+            </div>
+
+            <div class="row mx-n1 mb-lg-5">
+              {this.state.isLoading && (
+                <Spinner animation="border" variant="info" />
+              )}
+              {this.state.movies
+                .filter((res) =>
+                  res.Title.toLowerCase().includes(this.state.searchQuery)
+                )
+                .slice(0, 6)
+                .map((res) => (
+                  <TrendingNowSingle src={res.Poster} />
+                ))}
+            </div>
+          </div>
+        </section>
+
+        <section>
+          <div class="container-fluid mt-1 ml-6">
+            <div class="mb-2">
+              <h4 class="d-table-cell mb-0 text-light">Trending Now</h4>
+            </div>
+
+            <div class="row mx-n1 mb-lg-5">
+              {this.state.isLoading && (
+                <Spinner animation="border" variant="info" />
+              )}
+              {this.state.movies
+                .filter((res) =>
+                  res.Title.toLowerCase().includes(this.state.searchQuery)
+                )
+                .slice(0, 6)
+                .map((res) => (
+                  <TrendingNowSingle src={res.Poster} />
+                ))}
+            </div>
+          </div>
+        </section>
+      </div>
     );
   }
 }
