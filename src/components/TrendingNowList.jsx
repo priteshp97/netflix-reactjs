@@ -3,10 +3,12 @@
 
 import React from "react";
 import TrendingNowSingle from "./TrendingNowSingle";
+import { Col, Container, Form, Row } from "react-bootstrap";
 
 class TrendingNowList extends React.Component {
   state = {
     movies: [],
+    searchQuery: "",
   };
 
   componentDidMount = () => {
@@ -35,15 +37,37 @@ class TrendingNowList extends React.Component {
   render() {
     return (
       <section>
+        <Container>
+          <Row>
+            <Col>
+              <Form.Group>
+                <Form.Control
+                  type="text"
+                  placeholder="Search movies"
+                  value={this.state.searchQuery}
+                  onChange={(e) =>
+                    this.setState({ searchQuery: e.target.value })
+                  }
+                />
+              </Form.Group>
+            </Col>
+          </Row>
+        </Container>
+
         <div class="container-fluid mt-1 ml-6">
           <div class="mb-2">
             <h4 class="d-table-cell mb-0 text-light">Trending Now</h4>
           </div>
 
           <div class="row mx-n1 mb-lg-5">
-            {this.state.movies.slice(0, 6).map((res) => (
-              <TrendingNowSingle src={res.Poster} />
-            ))}
+            {this.state.movies
+              .filter((res) =>
+                res.Title.toLowerCase().includes(this.state.searchQuery)
+              )
+              .slice(0, 6)
+              .map((res) => (
+                <TrendingNowSingle src={res.Poster} />
+              ))}
           </div>
         </div>
       </section>

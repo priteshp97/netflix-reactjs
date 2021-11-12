@@ -8,9 +8,3 @@ h4 {
   font-size: 1rem;
   font-weight: bold;
 }
-section {
-  min-height: 93vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
